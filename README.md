@@ -1,4 +1,7 @@
 # zabuffer
+
+[![Build Status](https://travis-ci.org/rikvdh/zabuffer.svg?branch=master)](https://travis-ci.org/rikvdh/zabuffer)
+
 Zero-Allocation buffer handling in C
 
 ## Installation
