@@ -10,8 +10,7 @@
         "string",
         "data",
         "buffer",
-        "buf",
-        "circular buffer"
+        "buf"
     ],
     "src": [
         "zabuffer.h",
