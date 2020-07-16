@@ -99,7 +99,7 @@ size_t za_buffer_write_data(struct za_buffer *b, const void *buf, size_t len)
 	size_t n;
 
 	for (n = 0; n < len; n++) {
-		if (!za_buffer_write_u8(b, ((uint8_t *)buf)[n])) {
+		if (!za_buffer_write_u8(b, ((const uint8_t *)buf)[n])) {
 			break;
 		}
 	}
@@ -118,9 +118,8 @@ size_t za_buffer_memcpy(const struct za_buffer *b, size_t offset, const void *bu
 	return n;
 }
 
-void *za_buffer_memmem(const void *l, size_t l_len, const void *s, size_t s_len)
+const void *za_buffer_memmem(const void *l, size_t l_len, const void *s, size_t s_len)
 {
-	register uint8_t *cur, *last;
 	const uint8_t *cl = (const uint8_t *)l;
 	const uint8_t *cs = (const uint8_t *)s;
 
@@ -140,11 +139,12 @@ void *za_buffer_memmem(const void *l, size_t l_len, const void *s, size_t s_len)
 	}
 
 	/* the last position where its possible to find "s" in "l" */
-	last = (uint8_t *)cl + l_len - s_len;
+	const size_t last = l_len - s_len;
+	size_t n;
 
-	for (cur = (uint8_t *)cl; cur <= last; cur++) {
-		if (cur[0] == cs[0] && memcmp(cur, cs, s_len) == 0) {
-			return cur;
+	for (n = 0; n <= last; n++) {
+		if (cl[n] == cs[0] && memcmp(&cl[n], cs, s_len) == 0) {
+			return &cl[n];
 		}
 	}
 

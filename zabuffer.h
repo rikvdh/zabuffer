@@ -116,7 +116,7 @@ size_t za_buffer_memcpy(const struct za_buffer *b, size_t offset, const void *bu
  * @param s Pattern to search for
  * @param s_len Pattern length
  */
-void *za_buffer_memmem(const void *l, size_t l_len, const void *s, size_t s_len);
+const void *za_buffer_memmem(const void *l, size_t l_len, const void *s, size_t s_len);
 
 /**
  * Append buffer to another

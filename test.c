@@ -176,28 +176,27 @@ void test_za_buffer_memcpy(void) {
 }
 
 void test_za_buffer_memmem(void) {
-	void *ptr = NULL;
 	const uint8_t buffer[] = "\x11\x12\x13\x14";
 	const uint8_t search[] = "\x13";
 
 	/* Match */
-	ptr = za_buffer_memmem((const void *)buffer, sizeof(buffer) - 1, (const void *)search, sizeof(search) - 1);
+	const void *ptr = za_buffer_memmem((const void *)buffer, sizeof(buffer) - 1, (const void *)search, sizeof(search) - 1);
 	assert(&buffer[2] == ptr);
 
 	/* 0-length for l_len */
-	ptr = za_buffer_memmem((const void *)buffer, 0, (const void *)search, sizeof(search) - 1);
-	assert(NULL == ptr);
+	const void *ptr2 = za_buffer_memmem((const void *)buffer, 0, (const void *)search, sizeof(search) - 1);
+	assert(NULL == ptr2);
 
 	/* 0-length for s_len */
-	ptr = za_buffer_memmem((const void *)buffer, sizeof(buffer) - 1, (const void *)search, 0);
-	assert(NULL == ptr);
+	const void *ptr3 = za_buffer_memmem((const void *)buffer, sizeof(buffer) - 1, (const void *)search, 0);
+	assert(NULL == ptr3);
 
 	/* Check length boundary isn't exceeded */
 	const uint8_t alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const uint8_t searchbuf[] = "U";
 
-	ptr = za_buffer_memmem((const void *)alphabet, 10, (const void *)searchbuf, 1);
-	assert(NULL == ptr);
+	const void *ptr4 = za_buffer_memmem((const void *)alphabet, 10, (const void *)searchbuf, 1);
+	assert(NULL == ptr4);
 }
 
 void test_za_buffer_list_init(void) {
