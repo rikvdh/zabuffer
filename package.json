@@ -1,6 +1,6 @@
 {
     "name": "zabuffer",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "repo": "rikvdh/zabuffer",
     "description": "Zero-allocation buffer-handling",
     "license": "MIT",
